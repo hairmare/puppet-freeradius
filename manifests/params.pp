@@ -23,7 +23,7 @@ class freeradius::params {
   #                        the package manager.
   #  - $radius   = (Hash) This has specifies OS specific
   case $::operatingsystem {
-    debian,ubuntu,Gentoo: {
+    debian,ubuntu: {
       $radius         = {
         uid              => 'freerad',
         gid              => 'freerad',
@@ -36,6 +36,21 @@ class freeradius::params {
         client_packages  => ['libradius1'],
         mysql_packages   => ['freeradius-mysql'],
         service_name     => 'freeradius'
+      }
+    }
+    Gentoo: {
+      $radius         = {
+        uid              => 'radius',
+        gid              => 'radius',
+        base_dir         => '/etc/raddb',
+        listen_dir       => "/etc/raddb/listen",
+        vhost_dir        => '/etc/raddb/sites-enabled',
+        client_dir       => '/etc/raddb/clients',
+        radiusclient_dir => '/etc/radiusclient',
+        packages         => ['net-dialup/freeradius'],
+        client_packages  => ['net-dialup/freeradius-client'],
+        mysql_packages   => [],
+        service_name     => 'radiusd'
       }
     }
   }
