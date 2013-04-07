@@ -48,7 +48,7 @@ class freeradius::params {
         client_dir       => '/etc/raddb/clients',
         radiusclient_dir => '/etc/radiusclient',
         packages         => ['net-dialup/freeradius'],
-        client_packages  => ['net-dialup/freeradius-client'],
+        client_packages  => ['net-dialup/radiusclient'],
         mysql_packages   => [],
         service_name     => 'radiusd'
       }
