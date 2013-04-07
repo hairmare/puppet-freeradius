@@ -52,21 +52,21 @@
 #
 
 prefix = /usr
-exec_prefix = /usr
+exec_prefix = ${prefix}
 sysconfdir = /etc
-localstatedir = /var
+localstatedir = /var/lib
 sbindir = ${exec_prefix}/sbin
-logdir = /var/log/freeradius
-raddbdir = /etc/freeradius
+logdir = /var/log/radius
+raddbdir = ${sysconfdir}/raddb
 radacctdir = ${logdir}/radacct
 
 #
 #  name of the running server.  See also the "-n" command-line option.
-name = freeradius
+name = radiusd
 
 #  Location of config and logfiles.
 confdir = ${raddbdir}
-run_dir = ${localstatedir}/run/${name}
+run_dir =/var/run/radiusd
 
 # Should likely be ${localstatedir}/lib/radiusd
 db_dir = ${raddbdir}
@@ -103,7 +103,7 @@ db_dir = ${raddbdir}
 #	make
 #	make install
 #
-libdir = /usr/lib/freeradius
+libdir = /usr/lib64/freeradius
 
 #  pidfile: Where to place the PID of the RADIUS server.
 #
@@ -164,8 +164,8 @@ pidfile = ${run_dir}/${name}.pid
 #  It will join all groups where "user" is a member.  This can allow
 #  for some finer-grained access controls.
 #
-user = freerad
-group = freerad
+#user = radius
+#group = radius
 
 #  max_request_time: The maximum time (in seconds) to handle a request.
 #
@@ -222,8 +222,6 @@ cleanup_delay = 5
 #  Useful range of values: 256 to infinity
 #
 max_requests = 1024
-
-
 
 #  hostname_lookups: Log the names of clients or just their IP addresses
 #  e.g., www.freeradius.org (on) or 206.47.27.232 (off).
@@ -451,7 +449,7 @@ $INCLUDE proxy.conf
 
 # CLIENTS CONFIGURATION
 #
-#  Client configuration is defined in "clients.conf".
+#  Client configuration is defined in "clients.conf".  
 #
 
 #  The 'clients.conf' file contains all of the information from the old
@@ -523,6 +521,23 @@ thread pool {
 	#
 	min_spare_servers = 3
 	max_spare_servers = 10
+
+	#  When the server receives a packet, it places it onto an
+	#  internal queue, where the worker threads (configured above)
+	#  pick it up for processing.  The maximum size of that queue
+	#  is given here.
+	#
+	#  When the queue is full, any new packets will be silently
+	#  discarded.
+	#
+	#  The most common cause of the queue being full is that the
+	#  server is dependent on a slow database, and it has received
+	#  a large "spike" of traffic.  When that happens, there is
+	#  very little you can do other than make sure the server
+	#  receives less traffic, or make sure that the database can
+	#  handle the load.
+	#
+#	max_queue_size = 65536
 
 	#  There may be memory leaks or resource allocation problems with
 	#  the server.  If so, set this value to 300 or so, so that the
