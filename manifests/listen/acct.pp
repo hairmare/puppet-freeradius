@@ -7,7 +7,7 @@ class freeradius::listen::acct (
 ) {
 
   freeradius::listen { "acct-${name}":
-    type        => 'acct'
+    type        => 'acct',
     listen_ip   => $listen_ip,
     listen_ipv6 => $listen_ipv6,
     port        => $port,

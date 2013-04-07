@@ -7,7 +7,7 @@ class freeradius::listen::auth (
 ) {
 
   freeradius::listen { "auth-${name}":
-    type        => 'auth'
+    type        => 'auth',
     listen_ip   => $listen_ip,
     listen_ipv6 => $listen_ipv6,
     port        => $port,
