@@ -23,7 +23,7 @@ class freeradius::params {
   #                        the package manager.
   #  - $radius   = (Hash) This has specifies OS specific
   case $::operatingsystem {
-    debian,ubuntu: {
+    debian,ubuntu,Gentoo: {
       $radius         = {
         uid              => 'freerad',
         gid              => 'freerad',
