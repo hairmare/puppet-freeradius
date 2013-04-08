@@ -40,13 +40,14 @@ listen {
   #  source IP address for packets sent to a home server, the
   #  proxy listeners are automatically created.
 
+<%- if @listen_ip %>
   #  IP address on which to listen.
   #  Allowed values are:
   # dotted quad (1.2.3.4)
   #       hostname    (radius.example.com)
   #       wildcard    (*)
   ipaddr = <%= @listen_ip %>
-
+<%- end %>
 <%- if @listen_ipv6 %>
   #  OR, you can use an IPv6 address, but not both
   #  at the same time.
@@ -85,5 +86,57 @@ listen {
   #  See clients.conf for the configuration of "per_socket_clients".
   #
   clients = <%= @clients %>
+<%- end %>
+<%- if @socket %>
+        #
+        #  Socket location.
+        #
+        #  This file is created with the server's uid and gid.
+        #  It's permissions are r/w for that user and group, and
+        #  no permissions for "other" users.  These permissions form
+        #  minimal security, and should not be relied on.
+        #
+        socket = ${run_dir}/${name}.sock
+
+        #
+        #  The following two parameters perform authentication and
+        #  authorization of connections to the control socket.
+        #
+        #  If not set, then ANYONE can connect to the control socket,   
+        #  and have complete control over the server.  This is likely
+        #  not what you want.
+        #
+        #  One, or both, of "uid" and "gid" should be set.  If set, the
+        #  corresponding value is checked.  Unauthorized users result
+        #  in an error message in the log file, and the connection is
+        #  closed.
+        #
+
+<%- if @uid %>
+        #
+        #  Name of user that is allowed to connect to the control socket.
+        #
+       uid = <%= @uid %>
+
+<%- end %>
+<%- if @gid %>
+        #
+        #  Name of group that is allowed to connect to the control socket.
+        #
+       gid = <%= @gid %>
+
+<%- end %>
+<%- if @mode %>
+        #
+        #  Access mode.
+        #
+        #  This can be used to give *some* administrators access to
+        #  monitor the system, but not to change it.
+        #
+        #       ro = read only access (default)
+        #       rw = read/write access.
+        #
+       mode = <%= @mode %>
+<%- end %>
 <%- end %>
 }
