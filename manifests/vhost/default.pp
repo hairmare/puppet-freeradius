@@ -67,7 +67,7 @@ class freeradius::vhost::default (
   $postproxy_attr_rewrite         = $freeradius::params::vhost['postproxy']['attr_rewrite'],
   $postproxy_eap                  = $freeradius::params::vhost['postproxy']['eap'],
   $postproxy_extra                = undef
-) {
+) inherits freeradius::params {
   
   freeradius::vhost { $name:
     authorize_preprocess           => $authorize_preprocess,
