@@ -4,7 +4,11 @@ define freeradius::listen (
   $listen_ipv6 = undef,
   $port        = '0',
   $interface   = undef,
-  $clients     = undef
+  $clients     = undef,
+  $socket      = false,
+  $uid         = 'radius',
+  $gid         = 'radius',
+  $mode        = 'rw'
 ) {
 
   file { "${freeradius::params::radius['listen_dir']}/${name}.conf":
