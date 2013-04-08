@@ -7,6 +7,7 @@ define freeradius::vhost (
   $authorize_wimax                = $freeradius::params::vhost['authorize']['wimax'],
   $authorize_ipass                = $freeradius::params::vhost['authorize']['ipass'],
   $authorize_suffix               = $freeradius::params::vhost['authorize']['suffix'],
+  $authorize_proxy                = $freeradius::params::vhost['authorize']['proxy'],
   $authorize_ntdomain             = $freeradius::params::vhost['authorize']['ntdomain'],
   $authorize_eap                  = $freeradius::params::vhost['authorize']['eap'],
   $authorize_unix                 = $freeradius::params::vhost['authorize']['unix'],
