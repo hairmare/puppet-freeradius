@@ -9,6 +9,11 @@ class freeradius::listen::default (
     'control-socket' => {
       'type'   => control,
       'socket' => true
+    },
+    'inner-tunnel-auth' => {
+      'type'      => 'auth',
+      'listen_ip' => '127.0.0.1',
+      'port'      => '18120'
     }
   }
 ) {
