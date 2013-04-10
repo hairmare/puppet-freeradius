@@ -8,7 +8,8 @@ define freeradius::client (
   $login                         = undef,
   $password                      = undef,
   $virtual_server                = undef,
-  $coa_server                    = undef
+  $coa_server                    = undef,
+  $shortname                     = undef
 ) {
   File {
     owner => 'root',
