@@ -44,7 +44,7 @@ server <%= @name %> {
 
 <%- if @listeners %>
 <%- @listeners.each do |name,listener| %>
-# <%= @name %> listener
+# <%= name %> listener
 listen {
   #  Type of packets to listen for.
   #  Allowed values are:
@@ -59,7 +59,7 @@ listen {
   #   packets.  For examples, see the file
   #   raddb/sites-available/coa-server
   #
-  type = <%= @listener['type'] %>
+  type = <%= listener['type'] %>
 
   #  Note: "type = proxy" lets you control the source IP used for
   #        proxying packets, with some limitations:
@@ -78,20 +78,20 @@ listen {
   # dotted quad (1.2.3.4)
   #       hostname    (radius.example.com)
   #       wildcard    (*)
-  ipaddr = <%= @listener['listen_ip'] %>
+  ipaddr = <%= listener['listen_ip'] %>
 
-<%- if @listener['listen_ipv6'] %>
+<%- if listener['listen_ipv6'] %>
   #  OR, you can use an IPv6 address, but not both
   #  at the same time.
-  ipv6addr = <%= @listener['listen_ipv6'] %> # any.  ::1 == localhost
+  ipv6addr = <%= listener['listen_ipv6'] %> # any.  ::1 == localhost
 <%- end %>
   #  Port on which to listen.
   #  Allowed values are:
   # integer port number (1812)
   # 0 means "use /etc/services for the proper port"
-  port = <%= @listener['port'] %>
+  port = <%= listener['port'] %>
 
-<%- if @listener['interface'] %>
+<%- if listener['interface'] %>
   #  Some systems support binding to an interface, in addition
   #  to the IP address.  This feature isn't strictly necessary,
   #  but for sites with many IP addresses on one interface,
@@ -100,9 +100,9 @@ listen {
   #  If your system does not support this feature, you will
   #  get an error if you try to use it.
   #
-  interface = <%= @listener['interface'] %>
+  interface = <%= listener['interface'] %>
 <%- end %>
-<%- if @listener['clients'] %>
+<%- if listener['clients'] %>
   #  Per-socket lists of clients.  This is a very useful feature.
   #
   #  The name here is a reference to a section elsewhere in
@@ -117,7 +117,7 @@ listen {
   #
   #  See clients.conf for the configuration of "per_socket_clients".
   #
-  clients = <%= @listener['clients'] %>
+  clients = <%= listener['clients'] %>
 <%- end %>
 }
 <%- end %>
