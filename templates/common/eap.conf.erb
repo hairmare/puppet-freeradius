@@ -123,7 +123,7 @@
 			auth_type = <%= @eap_gtc_auth_type %>
 		}
 <%- end %>
-<%- eap_tls %>
+<%- if eap_tls %>
 		## EAP-TLS
 		#
 		#  See raddb/certs/README for additional comments
