@@ -84,6 +84,7 @@ class freeradius::params {
       wimax         => false,
       ipass         => false,
       suffix        => true,
+      proxy         => true,
       ntdomain      => false,
       eap           => {
         ok => 'return'
