@@ -5,10 +5,6 @@ class freeradius::listen::default (
     },
     'default-auth' => {
       'type' => 'auth'
-    },
-    'control-socket' => {
-      'type'   => control,
-      'socket' => true
     }
   }
 ) {
