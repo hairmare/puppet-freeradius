@@ -215,6 +215,19 @@ authorize {
 	<% if @authorize_suffix %>suffix<% end %>
   <% if @authorize_ntdomain %>ntdomain<% end %>
 
+  <%- if !@authorize_proxy %>
+     #
+     #  The "suffix" module takes care of stripping the domain
+     #  (e.g. "@example.com") from the User-Name attribute, and the
+     #  next few lines ensure that the request is not proxied.
+     #
+     #  If you want the inner tunnel request to be proxied, delete
+     #  the next few lines.
+     #
+     update control {
+            Proxy-To-Realm := LOCAL
+     }
+  <%- end %>
   <%- if @authorize_eap %>
 	#
 	#  This module takes care of EAP-MD5, EAP-TLS, and EAP-LEAP
