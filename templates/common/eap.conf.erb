@@ -607,7 +607,8 @@
 		#  explanation... but the fix does appear to work.
 		#
 		##################################################
-<%- end @eap_peap %>
+<%- end %>
+<%- if @eap_peap %>
 		#
 		#  The tunneled EAP session needs a default EAP type
 		#  which is separate from the one for the non-tunneled
