@@ -31,7 +31,7 @@ class freeradius::eap (
   $eap_tls_cache_max_entries              = '255',
   $eap_tls_verify_tmpdir                  = undef,
   $eap_tls_verify_client                  = undef,
-  $eap_tls_ocsp_enable                    = false,
+  $eap_tls_ocsp_enable                    = 'no',
   $eap_tls_ocsp_override_cert_url         = 'yes',
   $eap_tls_ocsp_url                       = 'http://127.0.0.1/ocsp/',
   $eap_tls_ocsp_use_nonce                 = undef,
