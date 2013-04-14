@@ -18,6 +18,7 @@ define freeradius::server (
   $authorize_ipass                = $freeradius::params::vhost['authorize']['ipass'],
   $authorize_suffix               = $freeradius::params::vhost['authorize']['suffix'],
   $authorize_ntdomain             = $freeradius::params::vhost['authorize']['ntdomain'],
+  $authorize_proxy                = $freeradius::params::vhost['authorize']['proxy'],
   $authorize_eap                  = $freeradius::params::vhost['authorize']['eap'],
   $authorize_unix                 = $freeradius::params::vhost['authorize']['unix'],
   $authorize_files                = $freeradius::params::vhost['authorize']['files'],
