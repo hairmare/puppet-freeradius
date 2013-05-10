@@ -2,7 +2,6 @@ class freeradius::config (
   $proxy = true
 ) inherits freeradius::params {
   $osfamily_lower = inline_template("<%= @osfamily.downcase %>")
-  $operatingsystem_lower = inline_template("<%= @operatingsystem.downcase %>")
   $proxy_requests = $proxy ? {
     false   => 'no',
     default => 'yes'
@@ -44,7 +43,7 @@ class freeradius::config (
     tag     => "freeradius_module_sql",
   }
   
-  if ($operatingsystem = 'Gentoo') {
+  if $operatingsystem == 'Gentoo' {
     file { "/etc/conf.d/radiusd": 
       ensure => file,
       content => template("freeradius/linux/radiusd.sysconf.erb"),
