@@ -58,5 +58,7 @@ class freeradius::eap (
   file { "${freeradius::params::radius['base_dir']}/eap.conf":
     ensure  => file,
     content => template('freeradius/common/eap.conf.erb'),
+    group   => $freeradius::params::radius['gid'],
+    mode    => '0640',
   }
 }
